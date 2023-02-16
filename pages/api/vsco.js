@@ -7,7 +7,11 @@ import fs from "fs";
 export default async function handler(req, res) {
   if (req.method === "POST" && req.url === "/api/vsco") {
     const { username } = req.body;
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox"],
+      executablePath: "/usr/bin/google-chrome",
+    });
     const page = await browser.newPage();
 
     await page.goto(`https://vsco.co/${username}/gallery`);
