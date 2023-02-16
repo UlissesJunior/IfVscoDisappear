@@ -20,6 +20,7 @@ export const Input = styled.input`
   border-radius: 6px;
   font-size: 1.2em;
   padding: 6px;
+  padding-right: 80px;
   position: relative;
   @media (max-width: 1100px) {
    width: 400px;
@@ -30,7 +31,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  width: 5vw;
+  width: 72px;
   height: 60px;
   background-color: #000;
   border-radius: 6px;
