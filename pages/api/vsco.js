@@ -1,5 +1,5 @@
 import chrome from "chrome-aws-lambda";
-import fetch from "node-fetch";
+import { fetch } from "node-fetch"
 import JSZip from "jszip";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
@@ -18,10 +18,9 @@ export default async function handler(req, res) {
       });
       const page = await browser.newPage();
 
-
     await page.goto(`https://vsco.co/${username}/gallery`);
 
-    if ((await page.title()) !== "Page Not Found | VSCO") {
+    if (!(await page.title()).includes("Page Not Found")) {
       let loadMoreButton = await page.$('[class="css-oww03x e1xqpt600"]');
       while (loadMoreButton !== null) {
         await loadMoreButton.click();
