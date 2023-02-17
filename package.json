@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "chrome-aws-lambda": "^10.1.0",
     "jszip": "^3.10.1",
     "next": "13.0.6",
     "node-fetch": "^3.3.0",

@@ -8,6 +8,7 @@ export default function Home() {
   const [user, setUser] = useState("");
   return (
     <Container>
+     
       <Image src={Logo} alt="IF VSCO DISAPPEAR" width={500} height={80} />
       <DivButton>
         <form method="POST" action="/api/vsco">
