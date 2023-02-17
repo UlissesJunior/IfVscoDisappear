@@ -2,7 +2,7 @@ import chrome from "chrome-aws-lambda";
 import { fetch } from "node-fetch"
 import JSZip from "jszip";
 import { v4 as uuidv4 } from "uuid";
-import fs from "fs";
+import fs from "fs/promises";
 
 export default async function handler(req, res) {
   if (req.method === "POST" && req.url === "/api/vsco") {
@@ -15,6 +15,7 @@ export default async function handler(req, res) {
         defaultViewport: chrome.defaultViewport,
         executablePath,
         headless: chrome.headless,
+        ignoreDefaultArgs: ["--disable-extensions"]
       });
       const page = await browser.newPage();
 
@@ -107,8 +108,9 @@ export default async function handler(req, res) {
       await browser.close();
       res.status(303).setHeader("Location", "/").end(); 
     }
-  } catch {
-    res.status(404);
+  } catch(e) {
+    console.log(e)
+    res.status(303).setHeader("Location", "/").end(); 
   }
 } 
 }
