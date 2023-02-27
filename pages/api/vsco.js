@@ -1,8 +1,8 @@
 import chrome from "chrome-aws-lambda";
-import { fetch } from "node-fetch"
+import fetch from "node-fetch";
 import JSZip from "jszip";
 import { v4 as uuidv4 } from "uuid";
-import fs from "fs/promises";
+import fs from "fs";
 
 export default async function handler(req, res) {
   if (req.method === "POST" && req.url === "/api/vsco") {
@@ -15,13 +15,13 @@ export default async function handler(req, res) {
         defaultViewport: chrome.defaultViewport,
         executablePath,
         headless: chrome.headless,
-        ignoreDefaultArgs: ["--disable-extensions"]
       });
       const page = await browser.newPage();
 
+
     await page.goto(`https://vsco.co/${username}/gallery`);
 
-    if (!(await page.title()).includes("Page Not Found")) {
+    if ((await page.title()) !== "Page Not Found | VSCO") {
       let loadMoreButton = await page.$('[class="css-oww03x e1xqpt600"]');
       while (loadMoreButton !== null) {
         await loadMoreButton.click();
@@ -108,9 +108,8 @@ export default async function handler(req, res) {
       await browser.close();
       res.status(303).setHeader("Location", "/").end(); 
     }
-  } catch(e) {
-    console.log(e)
-    res.status(303).setHeader("Location", "/").end(); 
+  } catch {
+    res.status(404);
   }
 } 
 }
