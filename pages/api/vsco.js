@@ -22,13 +22,13 @@ export default async function handler(req, res) {
     await page.goto(`https://vsco.co/${username}/gallery`);
 
     if ((await page.title()) !== "Page Not Found | VSCO") {
-      let loadMoreButton = await page.$('[class="css-oww03x e1xqpt600"]');
+      let loadMoreButton = await page.$('[class="css-178kg8n e1xqpt600"]');
       while (loadMoreButton !== null) {
         await loadMoreButton.click();
         await page
-          .waitForSelector('[class="css-oww03x e1xqpt600"]', { timeout: 3000 })
+          .waitForSelector('[class="css-178kg8n e1xqpt600"]', { timeout: 3000 })
           .catch(() => console.log("Load more button disappeared"));
-        loadMoreButton = await page.$('[class="css-oww03x e1xqpt600"]');
+        loadMoreButton = await page.$('[class="css-178kg8n e1xqpt600"]');
       }
 
       const scrollStep = 1000;
