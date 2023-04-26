@@ -17,7 +17,7 @@ export default function Home() {
             name="username"
             onChange={(e) => setUser(e.target.value)}
           ></Input>
-          <Button type="submit">
+          <Button style={{ cursor: "pointer" }}type="submit">
             {" "}
             <Image
               src={Search}

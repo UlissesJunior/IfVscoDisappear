@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       while (loadMoreButton !== null) {
         await loadMoreButton.click();
         await page
-          .waitForSelector('[class="css-178kg8n e1xqpt600"]', { timeout: 3000 })
+          .waitForSelector('div > div > main > div > div > section > div > button', { timeout: 3000 })
           .catch(() => console.log("Load more button disappeared"));
         loadMoreButton = await page.$('[class="css-178kg8n e1xqpt600"]');
       }
